@@ -1,0 +1,87 @@
+.course--module {
+    background: #2ecc71;
+    border-radius: 4px;
+    padding: 30px;
+    margin-bottom: 30px;
+    min-height: 107px;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.course--module:hover {
+    background: #27ae60;
+}
+
+.course--module:before, .course--module:after {
+    content: " ";
+    display: table;
+}
+
+.course--module:after {
+    clear: both;
+}
+
+.course--module--title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.course--label {
+    font-family: "Cousine";
+    font-size: 14px;
+    font-weight: 100;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+
+.course--title {
+    font-size: 18px;
+    color: #fff;
+}
+
+.course--link {
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+    border: 0;
+}
+
+.course--add--module {
+    background: #eee;
+    text-align: center;
+}
+
+.course--add--module:hover {
+    background: #bdc3c7;
+}
+
+.course--add--module:hover .course--add--title {
+    color: #fff;
+}
+
+.course--add--module:hover .add {
+    fill: #fff;
+}
+
+.course--add--title .add {
+    width: 13px;
+    height: auto;
+    margin: 0 5px 0 0;
+    fill: #999;
+}
+
+.course--add--title {
+    color: #999;
+    display: inline-block;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -55%);
+    -moz-transform: translate(-50%, -55%);
+    -ms-transform: translate(-50%, -55%);
+    transform: translate(-50%, -55%);
+}

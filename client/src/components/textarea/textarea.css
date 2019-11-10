@@ -1,0 +1,40 @@
+textarea {
+    width: 100%;
+    min-height: 300px;
+    border-radius: 6px;
+    background: #fff;
+    padding: 15px;
+    font-size: 16px;
+    margin: 0 0 20px;
+    border: 1px solid #ccc4d8;
+    color: #666;
+    line-height: 1.8;
+    outline: none;
+    font-family: "Cousine";
+    box-sizing: border-box;
+}
+
+textarea::-webkit-input-placeholder {
+    font-weight: normal;
+    font-size: 16px;
+}
+
+textarea:-moz-placeholder {
+    font-weight: normal;
+    font-size: 16px;
+}
+
+textarea::-moz-placeholder {
+    font-weight: normal;
+    font-size: 16px;
+}
+
+textarea:-ms-input-placeholder {
+    font-weight: normal;
+    font-size: 16px;
+}
+
+textarea:focus {
+    border-color: #7c689b;
+}
+  

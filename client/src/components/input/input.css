@@ -1,0 +1,32 @@
+
+input {
+    width: 100%;
+    color: #332a40;
+    border-radius: 6px;
+    border: 1px solid #ccc4d8;
+    padding: 15px;
+    margin-bottom: 15px;
+    outline: none;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+input::-webkit-input-placeholder {
+    font-weight: normal;
+}
+
+input:-moz-placeholder {
+    font-weight: normal;
+}
+
+input::-moz-placeholder {
+    font-weight: normal;
+}
+
+input:-ms-input-placeholder {
+    font-weight: normal;
+}
+
+input:focus {
+    border-color: #2ecc71;
+}

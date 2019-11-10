@@ -1,0 +1,165 @@
+.actions--bar {
+    border-bottom: 1px solid #d5f9fe;
+    background: #f8feff;
+    padding: 20px 0;
+    margin-top: -30px;
+}
+
+.actions--bar:before, .actions--bar:after {
+    content: " ";
+    display: table;
+}
+
+.actions--bar:after {
+    clear: both;
+}
+
+.actions--bar .button {
+    margin-right: 15px;
+}
+  
+.course--detail {
+    margin-top: 60px;
+    cursor: default;
+}
+
+.course--header {
+    margin-bottom: 30px;
+}
+
+.course--header .course--label {
+    font-size: 18px;
+    color: #999;
+}
+
+.course--header .course--title {
+    font-size: 48px;
+    margin-bottom: 15px;
+    color: #332a40;
+    cursor: default;
+}
+
+.course--header p {
+    font-size: 18px;
+    color: #f1c40f;
+    font-weight: 100;
+}
+
+.course--stats--list h4 {
+    font-family: "Cousine";
+    font-weight: 100;
+    color: #999;
+    font-size: 14px;
+    padding: 0 0 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.course--stats--list h3 {
+    font-family: "Work Sans", sans-serif;
+    font-size: 18px;
+}
+
+.course--stats--list > li {
+    margin-bottom: 50px;
+}
+
+.course--stats--list > li ul {
+    padding-left: 20px;
+}
+
+.course--stats--list > li li {
+    margin-bottom: 15px;
+    list-style-type: circle;
+}
+
+.course--description {
+    margin-bottom: 30px;
+}
+
+.course--description p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #444;
+}
+
+.course--description ol,
+.course--description ul {
+  list-style-type: none;
+}
+
+.course--description li {
+  position: relative;
+  padding-left: 30px;
+  padding: 30px 0 30px 5%;
+  border-top: 1px solid #ccc;
+  font-size: 16px;
+  line-height: 1.8;
+  font-family: "Cousine";
+}
+
+.course--description li:before, .course--description li:after {
+  content: " ";
+  display: table;
+}
+
+.course--description li:after {
+  clear: both;
+}
+
+.course--description ol li {
+  counter-increment: step-counter;
+}
+
+.course--description ol li:before {
+  content: counter(step-counter);
+  color: #999;
+  font-size: 18px;
+  position: absolute;
+  left: 0;
+  top: 34px;
+}
+
+.course--description ul li:before {
+  content: "";
+  float: left;
+  margin: 9px 0 0 -30px;
+  width: 5px;
+  height: 5px;
+  border: 1px solid #999;
+  border-radius: 6px;
+  display: block;
+}
+
+.course--description h1,
+.course--description h2,
+.course--description h3 {
+  font-family: "Work Sans", sans-serif;
+  color: #222;
+  margin-bottom: 30px;
+}
+
+.course--description h1 {
+  font-size: 36px;
+}
+
+.course--description h2 {
+  font-size: 30px;
+}
+
+.course--description h3 {
+  font-size: 24px;
+}
+
+.course--description h4 {
+  font-size: 18px;
+  font-weight: 100;
+  margin: 0 0 10px;
+  color: #999;
+  display: block;
+}
