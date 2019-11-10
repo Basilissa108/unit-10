@@ -1,5 +1,5 @@
 // import dependencies
-import React, { useCallback, useState, useEffect, useContext } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import Data from "./Data";
 
@@ -7,9 +7,6 @@ import Data from "./Data";
 export const UserContext = React.createContext();
 // create a higher order component that takes children as prop, assign it to the variable UserContextProvider, and export it
 export const UserContextProvider = ({ children }) => {
-	const data = new Data();
-	// get credentials from AuthenticationContext
-	const { credentials } = useContext(AuthenticationContext);
   	// assign a function to the variable setUserDetails to update the user details in the context
 	const setUserDetails = useCallback(({
 		id,
@@ -38,19 +35,14 @@ export const UserContextProvider = ({ children }) => {
 	// call useEffect with an empty dependency array to execute on render
 	useEffect(() => {
 		// create an async function to try and get a user and assign it to the variable tryGetUser
-		const tryGetUser = async () => {
-			// call data.getUser methode with the credentials from the authenticationcontext and assign the response to the variable res
-			const res = await data.getUser(credentials);
-			// check if response status is 200
-			if (res.status === 200) {
-				// parse the response and assign it to the variable user
-				const user = await res.json();
-				// call the setUserDetails function with the user
-				setUserDetails(user);
-			}
+		const tryGetUser = () => {
+			// try to get user from cookie
+			const user = Cookies.getJSON("user");
+			// if user has value call setUserDetails with it
+			if (user) setUserDetails(user);
 		};
 		// if credentials exist in the authenticationcontext call the tryGetUser function
-		if (credentials) tryGetUser();
+		tryGetUser();
 		// the following comment disables a linting rule specifying that all external dependencies need to be listed in order to trigger the method,
         // however, in this case we want to disregard changes of the dependencies and only execute the method when the component mounts and therefore provide an empty dependency array
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -89,7 +81,9 @@ export const AuthenticationContextProvider = ({ children }) => {
 			// encrypt the password and assign it to the variable encryptedPassword
 			const encryptedPassword = window.btoa(password);
 			// save encrypted credentials to a cookie which expires after 1 hour
-			Cookies.set("courses", JSON.stringify({ x: encryptedEmail, y: encryptedPassword }), { expires: 1/24 });
+			Cookies.set("courses", JSON.stringify({ x: encryptedEmail, y: encryptedPassword }), { expires: 1 / 24 });
+			// save user details to a cookie which expires after 1 hour
+			Cookies.set("user", JSON.stringify(user), { expires: 1/24 });
 			// return an object of the response status and the user to indicate success
 			return { response: res, user: user };
 		} else {
@@ -108,6 +102,8 @@ export const AuthenticationContextProvider = ({ children }) => {
 		});
 		// remove the cookie
 		Cookies.remove("courses");
+		// remove the cookie
+		Cookies.remove("user");
 		// return true to indicate success
 		return true;
 	};

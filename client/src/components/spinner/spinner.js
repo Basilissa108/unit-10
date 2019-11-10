@@ -5,4 +5,4 @@ import "./spinner.css";
 export const Spinner = () => {
     // return spinner element
     return <div className="spinner" />;
-}
+};

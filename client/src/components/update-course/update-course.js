@@ -18,39 +18,50 @@ export const UpdateCourse = () => {
     const history = useHistory();
     // get credentials from the AuthenticationContext
     const { credentials } = useContext(AuthenticationContext);
-    // create a tuple for isLoading and setIsLoading and call useState with false as initial value
-    const [isLoading, setIsLoading] = useState(false);
     // create a tuple for course and setCourse and call useState without initial value
     const [course, setCourse] = useState();
     // create a tuple for error and setError and call useState without initial value
     const [error, setError] = useState();
-    // call the useEffect hook with an empty dependency array to execute on render
+    // call the useEffect hook with userDetails.id as dependency
     useEffect(() => {
-        // assign an async function to the variable fetchCourse
-        const fetchCourse = async () => {
-            // set isLoading to true
-            setIsLoading(true);
-            // use getCourse method to get data from the api and assign the response to the variable res
-            const res = await data.getCourse(id);
-            // check if the response status is unlike 200 or 404, if so redirect to /error
-            if (res.status !== 200 && res.status !== 404) history.push("/error");
-            // check if the response status is 404, if so redirect to /notfound
-            if (res.status === 404) history.push("/notfound");
+        // check if userDetails.id exists and if the counter is below 1, the counter is used to only call the function once
+        if (userDetails.id) {
+            // call the fetchCourse function
+            fetchCourse();
+        }
+        // the following comment disables a linting rule specifying that all external dependencies need to be listed in order to trigger the method,
+        // however, in this case we want to disregard changes of the dependencies other than userDetails.id
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+     }, [userDetails.id])
+    // assign an async function to the variable fetchCourse
+    const fetchCourse = async () => {
+        // use getCourse method to get data from the api and assign the response to the variable res
+        const res = await data.getCourse(id);
+        // check if the status is 404
+        if (res.status === 404) {
+            // redirect to /notfound
+            history.push("/notfound");
+            // return so the rest of the code doesn't get executed
+            return;
+        }
+        // check if the response status is 200
+        if (res.status === 200) {
             // parse the response and assign it to the variable course
             const course = await res.json();
             // check if the authenticated user has the same id as the userId of the course, if not redirect to /forbidden
-            if (course.userId !== userDetails.id) history.push("/forbidden");
+            if (course.userId !== userDetails.id) {
+                // redirect to /forbidden
+                history.push("/forbidden");
+                // return so the rest of the code doesn't get executed
+                return;
+            }
             // call setCourse to update the courses in state
             setCourse(course);
-            // set isLoading to false
-            setIsLoading(false);
+        } else {
+            // redirect to /error
+            history.push("/error");
         }
-        // call the fetchCourse function
-        fetchCourse();
-        // the following comment disables a linting rule specifying that all external dependencies need to be listed in order to trigger the method,
-        // however, in this case we want to disregard changes of the dependencies and only execute the method when the component mounts and therefore provide an empty dependency array
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }
     // create an async function that takes a course as parameter and assign it to the variable onSubmit
     const onSubmit = async (course) => {
         const res = await data.updateCourse(id, course, credentials);
@@ -69,8 +80,8 @@ export const UpdateCourse = () => {
     }
     // return update course element
     return (
-        isLoading
-            ? <Spinner />
-            : <CourseForm course={course} onSubmit={onSubmit} error={error} />
+        course
+            ? <CourseForm course={course} onSubmit={onSubmit} error={error} />
+            : <Spinner />
     );
 }
