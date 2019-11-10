@@ -25,6 +25,9 @@ export const Courses = () => {
         }
         // call the fetchCourses function
         fetchCourses();
+        // the following comment disables a linting rule specifying that all external dependencies need to be listed in order to trigger the method,
+        // however, in this case we want to disregard changes of the dependencies and only execute the method when the component mounts and therefore provide an empty dependency array
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     // return courses element
     return (

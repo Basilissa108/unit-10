@@ -47,6 +47,9 @@ export const UpdateCourse = () => {
         }
         // call the fetchCourse function
         fetchCourse();
+        // the following comment disables a linting rule specifying that all external dependencies need to be listed in order to trigger the method,
+        // however, in this case we want to disregard changes of the dependencies and only execute the method when the component mounts and therefore provide an empty dependency array
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     // create an async function that takes a course as parameter and assign it to the variable onSubmit
     const onSubmit = async (course) => {

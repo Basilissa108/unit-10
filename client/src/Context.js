@@ -51,6 +51,9 @@ export const UserContextProvider = ({ children }) => {
 		};
 		// if credentials exist in the authenticationcontext call the tryGetUser function
 		if (credentials) tryGetUser();
+		// the following comment disables a linting rule specifying that all external dependencies need to be listed in order to trigger the method,
+        // however, in this case we want to disregard changes of the dependencies and only execute the method when the component mounts and therefore provide an empty dependency array
+        // eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	// return the children provided by props wrapped in a UserContext.Provider and set its value to userDetails in state
 	return (
@@ -67,7 +70,7 @@ export const AuthenticationContextProvider = ({ children }) => {
 	// instantiate a new data object and assign it to the variable data
 	const data = new Data();
 	// create a function to authenticate a user, it takes an email and a password parameter
-	const authenticate = useCallback(async (email, password) => {
+	const authenticate = async (email, password) => {
 		// post course to API
 		const res = await data.getUser({ username: email, password: password });
 		// check if response status is 200
@@ -93,9 +96,9 @@ export const AuthenticationContextProvider = ({ children }) => {
 			// return an object of the response status and undefined to indicate failure
 			return { response: res, user: undefined };
 		}
-	});
+	};
 	// create a function to unauthenticate a user
-	const unauthenticate = useCallback(() => {
+	const unauthenticate = () => {
 		// call setAuthentication and set authenticated to false and credentials to undefined
 		setAuthentication(prevState => {
 			return {
@@ -107,7 +110,7 @@ export const AuthenticationContextProvider = ({ children }) => {
 		Cookies.remove("courses");
 		// return true to indicate success
 		return true;
-	});
+	};
 	// function to try to get credentials from a cookie
 	const getCredentialsFromCookie = () => {
 		// try to get encrypted credentials from cookie
