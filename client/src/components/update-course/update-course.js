@@ -32,8 +32,10 @@ export const UpdateCourse = () => {
             setIsLoading(true);
             // use getCourse method to get data from the api and assign the response to the variable res
             const res = await data.getCourse(id);
-            // check if the response status is unlike 200, if so throw an exception
-            if (res.status !== 200) history.push("/error");
+            // check if the response status is unlike 200 or 404, if so redirect to /error
+            if (res.status !== 200 && res.status !== 404) history.push("/error");
+            // check if the response status is 404, if so redirect to /notfound
+            if (res.status === 404) history.push("/notfound");
             // parse the response and assign it to the variable course
             const course = await res.json();
             // check if the authenticated user has the same id as the userId of the course, if not redirect to /forbidden
